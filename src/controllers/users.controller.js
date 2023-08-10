@@ -1,5 +1,4 @@
 import { userDataDB } from "../repositories/users.repository.js";
-import { rankingUsersDB } from "../repositories/users.repository.js";
 
 export async function getUserData(req, res) {
     const { userId } = res.locals;
