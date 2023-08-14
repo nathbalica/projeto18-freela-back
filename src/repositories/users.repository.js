@@ -1,13 +1,12 @@
 import { db } from "../database/database.connection.js";
 
-export function createUserDB(name, email, password) {
-
-    const result = db.query(
-        `INSERT INTO users (name, email, password) VALUES ($1, $2, $3);`,
-        [name, email, password]
-    )
-    return result
+export function createUserDB(name, cpf, phone, email, password) {
+    return db.query(
+        `INSERT INTO users (name, cpf, phone, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+        [name, cpf, phone, email, password]
+    );
 }
+
 
 export function getEmailUserDB(email){
     const result = db.query(`SELECT * FROM users where email=$1;`, [email])

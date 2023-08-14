@@ -4,14 +4,14 @@ import bcrypt from "bcrypt"
 import { v4 as uuid } from "uuid"
 
 export async function signUp(req, res) {
-    const { name, email, password} = req.body;
+    const { name, cpf, phone, email, password} = req.body;
 
     try{
         const user = await getEmailUserDB(email)
         if(user.rowCount !== 0) return res.status(409).send({message: "Email já existe"})
 
         const hash = bcrypt.hashSync(password, 10)
-        await createUserDB(name, email, hash)
+        await createUserDB(name, cpf, phone, email, hash)
 
         res.sendStatus(201)
     }catch(err){

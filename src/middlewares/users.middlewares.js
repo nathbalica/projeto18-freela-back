@@ -10,7 +10,7 @@ export async function validateAuth(req, res, next) {
   try {
     const session = await findSessionDB(token);
     if (session.rowCount === 0) return res.sendStatus(401)
-    res.locals.userId = session.rows[0].userId
+    res.locals.userId = session.rows[0].user_id
 
     next();
   } catch (err) {
